@@ -5,8 +5,7 @@
 
   <div>
     <div id="section_navbar" class="global_navbar"></div>
-    <div id="section_body">
-    </div>
+    <div id="section_body"></div>
   </div>
 
 </div>
@@ -14,8 +13,9 @@
 <script>
 
 document.getElementById("section_navbar").innerHTML = navbar([
-  "Data",
-  "Network"
+  ["View", ["Text"]],
+  ["Data", ["Load", "Save"]],
+  ["Network", ["Load", "Save"]]
   ]);
 
 function navbar(menu) {
@@ -24,16 +24,16 @@ function navbar(menu) {
 
   for(var i = 0; i < menu.length; ++i) {
     string_out += '<button id="';
-    string_out += 'select_' + menu[i];
+    string_out += 'select_' + menu[i][0];
     string_out += '">';
-    string_out += menu[i];
+    string_out += menu[i][0];
     string_out += '</button>';
   }
 
   return string_out;
 }
 
-document.getElementById("select_Data").onclick = function() {
+document.getElementById("select_View").onclick = function() {
   document.getElementById("section_body").innerHTML = "data jhbefldkbw";
 }
 
