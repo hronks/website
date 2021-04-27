@@ -1,0 +1,47 @@
+
+
+<div class="global_navbar">
+  <button id="home_nav_button">Home</button>
+  <div class="dropdown">
+  <button class="dropbtn" onclick="show_list_data('data_dropdown')">
+    Data &#9660</button>
+  <div class="dropdown-content" id="data_dropdown">
+    <button id="ann_nav_button">Neural Networks</button>
+  </div>
+  </div>
+</div>
+
+<div id="main"></div>
+
+<script>
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function show_list_data(list_data_id) {
+  document.getElementById(list_data_id).classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("data_dropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+
+// Opening page
+$("#main").load("home.html");
+
+// What happens when options selected
+document.getElementById("ann_nav_button").onclick = function() {
+  $("#main").load("ann.html");
+}
+
+document.getElementById("home_nav_button").onclick = function() {
+  $("#main").load("home.html");
+}
+
+
+</script>
