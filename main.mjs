@@ -3,9 +3,11 @@ import { Menu } from './modules/menu.mjs';
 import { SubWindow } from './modules/sub_window.mjs';
 import { MainViewState } from './modules/website.mjs';
 
+import { data_window_content } from './window_content/data.mjs';
+
 let top_menu = new Menu(
 
-  'top_menu', document.getElementById('top_menu_wrapper'),
+  'top_menu', 'top_menu_wrapper',
   '20px', '10px 20px',
   'black', '#f5f5f5', '#dcdcdc',
   'black', '#f5f5f5', '#c0c0c0',
@@ -15,39 +17,31 @@ let top_menu = new Menu(
     ["Data", ["Save", "Load"]],
     ["Model", ["Save", "Load"]]
   ]);
-
-top_menu.create();
-
-
-// load a default window state if there isn't one saved
+top_menu.load();
 
 //localStorage.clear();
-if (localStorage.getItem('window_state') == null) {
-  var window_state =
+
+let main_view_state = new MainViewState(
+
+  'main_view_state', 'main_view',
   [
     ['Model', '60px', '40px', '500px', '400px'],
     ['Data', '90px', '700px', '400px', '350px']
-  ];
-  localStorage.setItem("window_state", JSON.stringify(window_state));
-}
-
-// Pull the saved window state from memory and load
-var saved_window_state = JSON.parse(localStorage.getItem("window_state"));
-let state = new MainViewState(
-  'main_view_state', document.getElementById('main_view'),
-  saved_window_state,
+  ],
+  'saved_window_state', false
 );
-state.load_state();
+main_view_state.load();
 
 
 // menu click functions
 
 top_menu.if_clicked('View', 'Save view', function() {
 
-  state.update();
-  var window_state = state.sub_windows_form;
-  localStorage.setItem("window_state", JSON.stringify(window_state));
+  main_view_state.update();
+  localStorage.setItem('saved_window_state', JSON.stringify(
+    main_view_state.sub_windows_form
+  ));
 
   console.log("window view saved:");
-  console.log(JSON.stringify(window_state));
+  console.log(JSON.stringify(main_view_state.sub_windows_form));
 });

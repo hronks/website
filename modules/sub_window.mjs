@@ -1,15 +1,16 @@
 class SubWindow {
 
   constructor(
-    id, parent, header, top, left, width, height
+    id, parent_id, header, top, left, width, height, content
   ) {
     this.id = id;
-    this.parent = parent;
+    this.parent_id = parent_id;
     this.header = header;
     this.top = top;
     this.left = left;
     this.width = width;
     this.height = height;
+    this.content = content;
   }
 
 
@@ -20,7 +21,7 @@ class SubWindow {
     let div2 = document.createElement('div');
     let div3 = document.createElement('div');
 
-    this.parent.appendChild(div1);
+    document.getElementById(this.parent_id).appendChild(div1);
     div1.id = this.id;
     div1.style.position = 'absolute';
 //    div1.style.zIndex = '9';
@@ -51,7 +52,7 @@ class SubWindow {
     document.getElementById(this.id).appendChild(div3);
     div3.id = this.id + '_content';
 
-    div3.innerHTML = "blah blah blah";
+    div3.innerHTML = this.content;
 
     // Make the DIV element draggable:
     dragElement(div1);
@@ -93,7 +94,7 @@ class SubWindow {
         _this.left = elmnt.style.left;
 
 
-        
+
       }
 
       function closeDragElement() {

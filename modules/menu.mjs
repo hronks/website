@@ -1,6 +1,6 @@
 class Menu {
   constructor(
-    id, parent,
+    id, parent_id,
     font_size, padding,
     text_colour, background_colour, select_colour,
     dropdown_text_colour, dropdown_background_colour, dropdown_select_colour,
@@ -8,7 +8,7 @@ class Menu {
   ) {
 
     this.id = id;
-    this.parent = parent;
+    this.parent_id = parent_id;
     this.structure = structure;
     this.active_option = -1;
     this.class = id + '_class';
@@ -28,12 +28,12 @@ class Menu {
 
   // new class stuff above here
 
-  create() {
+  load() {
 
     let _this = this;
     let div = document.createElement('div');
 
-    this.parent.appendChild(div);
+    document.getElementById(this.parent_id).appendChild(div);
     div.id = this.id;
     div.className = this.class;
 
@@ -200,34 +200,4 @@ class Menu {
 
 }
 
-
-
 export { Menu };
-
-
-
-
-
-
-//      <div class="dropdown-content" id="data_dropdown">
-//        <button id="ann_nav_button">Neural Networks</button>
-//.dropdown-content {
-//  display: none;
-//  position: absolute;
-//  background-color: #f9f9f9;
-//  min-width: 160px;
-//  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-//  z-index: 1;
-
-//.dropdown-content button {
-//  min-width: inherit;
-//  border: none;
-//  font-size: 16px;
-//  background: none;
-//  float: none;
-//  color: black;
-//  padding: 12px 16px;
-//  cursor: pointer;
-//  text-decoration: none;
-//  display: block;
-//  text-align: left;
