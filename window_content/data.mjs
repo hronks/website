@@ -1,11 +1,10 @@
 
-export function data_window_content() {
+export function data_window() {
 
-  var output;
+  var output = "";
 
-  output = 'data content from function';
-
-
+  output += 'Source data<br>';
+  output += '<input type="file" id="file-selector" multiple>';
 
   return output;
 

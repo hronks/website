@@ -57,6 +57,19 @@ class MainViewState {
 
   };
 
+/*
+  on_display(sub_window, action) {
+
+    if (document.getElementById(sub_window) == null)
+      console.log(sub_window + ' does not exist!');
+
+    else {
+      action;
+    }
+
+  };
+  */
+
 }
 
 
