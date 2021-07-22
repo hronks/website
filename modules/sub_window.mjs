@@ -1,7 +1,7 @@
 class SubWindow {
 
   constructor(
-    id, parent_id, header, top, left, width, height, content
+    id, parent_id, header, top, left, width, height, content, visible
   ) {
     this.id = id;
     this.parent_id = parent_id;
@@ -11,6 +11,7 @@ class SubWindow {
     this.width = width;
     this.height = height;
     this.content = content;
+    this.visible = visible;
   }
 
 
@@ -30,6 +31,7 @@ class SubWindow {
     div1.style.border = '1px solid #d3d3d3';
     div1.style.resize = 'both';
     div1.style.overflow = 'auto';
+    if(!(this.visible)) div1.style.visibility = 'hidden';
 
     div1.style.fontFamily = 'sans-serif';
 

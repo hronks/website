@@ -39,6 +39,45 @@ class Menu {
 
     div.style.backgroundColor = this.background;
 
+    let div2 = document.createElement('div');
+    let button = document.createElement('button');
+    let div_drop = document.createElement('div');
+
+    // add the settings area
+
+    div.appendChild(div2);
+
+    div2.style.position = 'relative';
+    div2.style.float = 'right';
+    div2.style.display = 'inline-block';
+
+    div2.appendChild(button);
+    button.id = this.id + '_settings';
+    button.innerHTML = 'settings';
+    button.style.padding = '0';
+    button.style.background = 'none';
+    button.style.padding = this.padding;
+    button.style.outline = 'none';
+    button.style.userSelect = "none";
+    button.style.color = this.text_colour;
+    button.style.fontSize = this.font_size;
+    button.style.border = 'none';
+
+    div2.appendChild(div_drop);
+    div_drop.id = this.id + '_settings_drop';
+    div_drop.className = 'dropbtn';
+    div_drop.style.position = 'fixed';
+    div_drop.style.xIndex = '1';
+
+    div_drop.style.display = 'none';
+    div_drop.style.boxShadow = '0px 8px 16px 0px rgba(0,0,0,0.2)';
+    div_drop.style.zIndex = '1';
+    div_drop.style.backgroundColor = this.dropdown_background;
+    div_drop.style.margin = '0';
+    div_drop.style.overflow = 'hidden';
+
+    // add the buttons
+
     for(let i = 0; i < this.structure.length; ++i) {
 
       let button = document.createElement('button');
@@ -106,13 +145,36 @@ class Menu {
       }
     }
 
-    // Add event listeners
+    // Setting event listener
+
+    let x = document.getElementById(this.id + '_settings');
+    let y = document.getElementById(this.id + '_settings_drop');
+
+    // click a menu option
+    x.addEventListener('click', function() {
+
+      var test = y.style.display;
+
+      if(test == 'block') {
+        test = 'none';
+        x.style.backgroundColor = _this.background;
+      }
+      else {
+        test = 'block';
+        x.style.backgroundColor = _this.background;
+      }
+    });
+
+
+
+    // Menu event listeners
+
     for(let i = 0; i < this.structure.length; ++i) {
 
       let x = document.getElementById(this.id + '_' + i);
       let y = document.getElementById(_this.id + '_drop_' + i);
 
-      // click a menue option
+      // click a menu option
       x.addEventListener('click', function() {
         x.style.backgroundColor = _this.menu_root_select;
         var test = y.style.display;

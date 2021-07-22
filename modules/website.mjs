@@ -29,6 +29,8 @@ class MainViewState {
 
   load() {
 
+
+
     for(let i = 0; i < this.sub_windows_form.length; ++i) {
       this.sub_windows[i] = new SubWindow(
         this.id + '_sub_window_' + i, this.parent_id,
@@ -37,8 +39,10 @@ class MainViewState {
         this.sub_windows_form[i][2],
         this.sub_windows_form[i][3],
         this.sub_windows_form[i][4],
-        this.sub_windows_form[i][5]
+        this.sub_windows_form[i][5],
+        this.sub_windows_form[i][6]
       );
+      console.log(this.sub_windows_form[i]);
       this.sub_windows[i].create();
     }
 

@@ -20,6 +20,22 @@ let top_menu = new Menu(
 top_menu.load();
 
 
+// set up the windows
+
+localStorage.clear();
+
+let main_view_state = new MainViewState(
+
+  'main_view_state', 'main_view',
+  [
+    ['Model', '60px', '40px', '500px', '400px', "hello", true],
+    ['Data', '90px', '700px', '400px', '350px', data_window(), true]
+  ],
+  'saved_window_state', false
+);
+main_view_state.load();
+
+
 // menu click functions
 
 top_menu.if_clicked('View', 'Save view', function() {
@@ -32,19 +48,3 @@ top_menu.if_clicked('View', 'Save view', function() {
   console.log("window view saved:");
   console.log(JSON.stringify(main_view_state.sub_windows_form));
 });
-
-
-// set up the windows
-
-localStorage.clear();
-
-let main_view_state = new MainViewState(
-
-  'main_view_state', 'main_view',
-  [
-    ['Model', '60px', '40px', '500px', '400px'],
-    ['Data', '90px', '700px', '400px', '350px', data_window()]
-  ],
-  'saved_window_state', false
-);
-main_view_state.load();
