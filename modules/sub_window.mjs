@@ -1,3 +1,5 @@
+import { Field } from './field.mjs';
+
 class SubWindow {
 
   constructor(
@@ -54,7 +56,13 @@ class SubWindow {
     document.getElementById(this.id).appendChild(div3);
     div3.id = this.id + '_content';
 
-    div3.innerHTML = this.content;
+    for(let i = 0; i < this.content.length; ++i) {
+      //create(this.content[i], 'div4');
+      let div4 = document.createElement('div');
+      div4.innerHTML = this.content[i];
+      div3.appendChild(div4);
+
+    }
 
     // Make the DIV element draggable:
     dragElement(div1);
