@@ -1,9 +1,11 @@
-import { Field } from './field.mjs';
+import { Object } from './object.mjs';
+import { Field } from './object.mjs';
+import { ObjectSet } from './object.mjs';
 
 class SubWindow {
 
   constructor(
-    id, parent_id, header, top, left, width, height, content, visible
+    id, parent_id, header, top, left, width, height, object_set, content, visible
   ) {
     this.id = id;
     this.parent_id = parent_id;
@@ -12,6 +14,7 @@ class SubWindow {
     this.left = left;
     this.width = width;
     this.height = height;
+    this.object_set = object_set;
     this.content = content;
     this.visible = visible;
   }
@@ -56,10 +59,13 @@ class SubWindow {
     document.getElementById(this.id).appendChild(div3);
     div3.id = this.id + '_content';
 
+    console.log('!!!');
+    console.log(this.object_set);
+
     for(let i = 0; i < this.content.length; ++i) {
       //create(this.content[i], 'div4');
       let div4 = document.createElement('div');
-      div4.innerHTML = this.content[i];
+      div4.innerHTML = this.object_set[this.content[i]];
       div3.appendChild(div4);
 
     }

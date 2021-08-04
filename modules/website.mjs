@@ -3,15 +3,19 @@ import { SubWindow } from './sub_window.mjs';
 class MainViewState {
 
   constructor(
-    id, parent_id, sub_windows_form,
+    id, parent_id, object_set, sub_windows_form,
     local_storage_name, overwrite_storage
   ) {
     this.id = id;
     this.parent_id = parent_id;
+    this.object_set = object_set;
     this.sub_windows_form = sub_windows_form;
     this.sub_windows = [];
     this.local_storage_name = local_storage_name;
     this.overwrite_storage_form = overwrite_storage;
+
+    console.log('!!!');
+    console.log(this.object_set);
 
 
     // load a default window state if there isn't one saved
@@ -39,6 +43,7 @@ class MainViewState {
         this.sub_windows_form[i][2],
         this.sub_windows_form[i][3],
         this.sub_windows_form[i][4],
+        this.object_set,
         this.sub_windows_form[i][5],
         this.sub_windows_form[i][6]
       );

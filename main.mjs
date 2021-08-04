@@ -1,7 +1,8 @@
 
 import { Menu } from './modules/menu.mjs';
-import { Field } from './modules/field.mjs';
-import { FieldSet } from './modules/field.mjs';
+import { Object } from './modules/object.mjs';
+import { Field } from './modules/object.mjs';
+import { ObjectSet } from './modules/object.mjs';
 import { SubWindow } from './modules/sub_window.mjs';
 import { MainViewState } from './modules/website.mjs';
 
@@ -31,29 +32,19 @@ top_menu.load();
 localStorage.clear();
 
 
-let field_set = new FieldSet(
-  ['input_A', 'string', 'Input A'],
-  ['input_B', 'string', 'Input B'],
-  ['input_C', 'string', 'Input C']
+let site_object_set = new ObjectSet( [
+    ['field', ['input_A', 'Input A', 'string']],
+    ['field', ['input_B', 'Input B', 'string']],
+    ['field', ['input_B', 'Input C', 'string']]
+  ]
 )
-field_set.load();
-
-
 
 let main_view_state = new MainViewState(
 
-  'main_view_state', 'main_view',
+  'main_view_state', 'main_view', site_object_set,
   [
-    ['Model', '60px', '40px', '500px', '400px', [
-      'input_A',
-      'input_B',
-      'input_C'
-    ], true],
-
-    ['Data', '90px', '700px', '400px', '350px', [
-      'input_A',
-      'input_B'
-    ], true]
+    ['Model', '60px', '40px', '500px', '400px', [0, 1, 2], true],
+    ['Data', '90px', '700px', '400px', '350px', [0, 2], true]
   ],
   'saved_window_state', false
 );
