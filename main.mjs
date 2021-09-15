@@ -15,12 +15,12 @@ import { data_window } from './window_content/data.mjs';
 let top_menu = new Menu(
 
   'top_menu', 'top_menu_wrapper',
-  '20px', '10px 20px',
+  '12px', '5px 5px',
   'black', '#f5f5f5', '#dcdcdc',
   'black', '#f5f5f5', '#c0c0c0',
   [
     ["File", ["Save", "Load"]],
-    ["View", ["Save view", "Load view", "Text"]],
+    ["View", ["Save view", "Load view", "Model", ["Windows",["Model", "Data"]]]],
     ["Data", ["Save", "Load"]],
     ["Model", ["Save", "Load"]]
   ]);
@@ -62,4 +62,19 @@ top_menu.if_clicked('View', 'Save view', function() {
 
   console.log("window view saved:");
   console.log(JSON.stringify(main_view_state.sub_windows_form));
+});
+
+top_menu.if_clicked('View', 'Model', function() {
+
+  if(main_view_state.sub_windows[0].visible == true) {
+    main_view_state.sub_windows_form[0][6] = false;
+    main_view_state.sub_windows[0].visible = false;
+    document.getElementById(main_view_state.sub_windows[0].id).style.visibility = 'hidden';
+  }
+  else {
+    main_view_state.sub_windows_form[0][6] = true;
+    main_view_state.sub_windows[0].visible = true;
+    document.getElementById(main_view_state.sub_windows[0].id).style.visibility = 'visible';
+  }
+
 });

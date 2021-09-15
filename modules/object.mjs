@@ -38,7 +38,7 @@ class ObjectSet {
           objects[i][1][1],
           objects[i][1][2]))
         }
-        console.log(this.objects[i]);
+//        console.log(this.objects[i]);
       }
 
   }

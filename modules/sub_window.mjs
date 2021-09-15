@@ -59,13 +59,12 @@ class SubWindow {
     document.getElementById(this.id).appendChild(div3);
     div3.id = this.id + '_content';
 
-    console.log('!!!');
-    console.log(this.object_set);
-
     for(let i = 0; i < this.content.length; ++i) {
+
+//      console.log(this.object_set.objects[i]);
       //create(this.content[i], 'div4');
       let div4 = document.createElement('div');
-      div4.innerHTML = this.object_set[this.content[i]];
+      div4.innerHTML = this.object_set.objects[this.content[i]].name;
       div3.appendChild(div4);
 
     }

@@ -14,9 +14,6 @@ class MainViewState {
     this.local_storage_name = local_storage_name;
     this.overwrite_storage_form = overwrite_storage;
 
-    console.log('!!!');
-    console.log(this.object_set);
-
 
     // load a default window state if there isn't one saved
 
@@ -47,7 +44,7 @@ class MainViewState {
         this.sub_windows_form[i][5],
         this.sub_windows_form[i][6]
       );
-      console.log(this.sub_windows_form[i]);
+//      console.log(this.sub_windows_form[i]);
       this.sub_windows[i].create();
     }
 

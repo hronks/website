@@ -24,6 +24,8 @@ class Menu {
     this.dropdown_background = dropdown_background_colour;
     this.dropdown_button = dropdown_select_colour;
 
+    this.dropdown_width = [];
+
   }
 
   // new class stuff above here
@@ -74,7 +76,7 @@ class Menu {
     div_drop.style.zIndex = '1';
     div_drop.style.backgroundColor = this.dropdown_background;
     div_drop.style.margin = '0';
-    div_drop.style.overflow = 'hidden';
+//    div_drop.style.overflow = 'hidden';
 
     // add the buttons
 
@@ -112,12 +114,47 @@ class Menu {
       div_drop.style.zIndex = '1';
       div_drop.style.backgroundColor = this.dropdown_background;
       div_drop.style.margin = '0';
-      div_drop.style.overflow = 'hidden';
+//      div_drop.style.overflow = 'hidden';
 
 //      div_drop.style.minWidth = '160px';
 
 //      div.appendChild(div_drop);
 //      div_drop.id = this.id + '_drop_' + i;
+
+      // click a menu option event listener
+
+      button.addEventListener('click', function() {
+        button.style.backgroundColor = _this.menu_root_select;
+        var test = div_drop.style.display;
+        if(test == 'block') {
+          test = 'none';
+          button.style.backgroundColor = _this.background;
+          _this.active_option = -1;
+        }
+        else {
+          test = 'block';
+          _this.active_option = i;
+        }
+        div_drop.style.display = test;
+      });
+
+      // mvoe to another menu option event listener
+
+      button.addEventListener('mouseover', function() {
+
+        let j = _this.active_option;
+        if(j != -1 && j != i) {
+          let z = document.getElementById(_this.id + '_drop_' + j);
+          let a = document.getElementById(_this.id + '_' + j);
+          z.style.display = 'none';
+          a.style.backgroundColor = _this.background;
+          button.style.backgroundColor = _this.menu_root_select;
+          div_drop.style.display = 'block';
+          _this.active_option = i;
+        }
+
+      });
+
 
       for(let j = 0; j < this.structure[i][1].length; ++j) {
 
@@ -126,7 +163,8 @@ class Menu {
         div_drop.appendChild(button);
         button.id = this.id + '_' + i + '_' + j;
         button.style.display = 'block';
-        button.innerHTML = this.structure[i][1][j];
+        if(Array.isArray(this.structure[i][1][j])) button.innerHTML = this.structure[i][1][j][0] + " ->";
+        else button.innerHTML = this.structure[i][1][j];
 
         button.style.color = this.menu_text_colour;
         button.style.fontSize = this.font_size;
@@ -142,8 +180,79 @@ class Menu {
 
         button.style.width = '100%';
 
+        button.style.position = 'relative';
+
+        if(Array.isArray(this.structure[i][1][j])) {
+
+          let pop_out = document.createElement('div');
+          button.appendChild(pop_out);
+//          pop_out.style.display = 'block';
+//          pop_out.style.position = 'absolute';
+          pop_out.style.position = 'absolute';
+          pop_out.style.top = '0';
+          pop_out.style.left = '150px';
+          pop_out.style.width = '150px';
+          pop_out.style.listStyle = 'none';
+          pop_out.style.padding = '0';
+          pop_out.style.margin = '0';
+          pop_out.style.overflow = 'visible';
+          pop_out.style.display  = 'block';
+          pop_out.style.backgroundColor = this.dropdown_background;
+
+
+          for(let k = 0; k < this.structure[i][1][j][1].length; ++k) {
+
+            let button_pop = document.createElement('button');
+
+            pop_out.appendChild(button_pop);
+            button_pop.id = this.id + '_' + i + '_' + j + '_' + k;
+            button_pop.style.display = 'block';
+
+            button_pop.innerHTML = this.structure[i][1][j][1][k];
+
+            button_pop.style.textIndent = '8px';
+            button_pop.style.textAlign = 'left';
+            button_pop.style.float = 'none';
+            button_pop.style.background = 'none';
+            button_pop.style.border = 'none';
+            button_pop.style.outline = 'none';
+            button_pop.style.userSelect = "none";
+
+            button_pop.style.width = '100%';
+
+
+
+          }
+
+        }
+
+        button.addEventListener('mouseover', function() {
+          button.style.backgroundColor = _this.dropdown_button;
+        });
+
+        button.addEventListener('mouseleave', function() {
+          button.style.backgroundColor = _this.dropdown_background;
+        });
+
+        div_drop.style.display = 'block';
+//        console.log(button.offsetWidth);
+        this.dropdown_width[i] = button.offsetWidth;
+        div_drop.style.display = 'none';
+
       }
+
     }
+
+    for(let i = 0; i < this.structure.length; ++i) {
+      console.log(this.dropdown_width[i]);
+    }
+
+    // add the pop out menues
+
+
+
+
+
 
     // Setting event listener
 
@@ -165,63 +274,6 @@ class Menu {
       }
     });
 
-
-
-    // Menu event listeners
-
-    for(let i = 0; i < this.structure.length; ++i) {
-
-      let x = document.getElementById(this.id + '_' + i);
-      let y = document.getElementById(_this.id + '_drop_' + i);
-
-      // click a menu option
-      x.addEventListener('click', function() {
-        x.style.backgroundColor = _this.menu_root_select;
-        var test = y.style.display;
-        if(test == 'block') {
-          test = 'none';
-          x.style.backgroundColor = _this.background;
-          _this.active_option = -1;
-        }
-        else {
-          test = 'block';
-          _this.active_option = i;
-        }
-        y.style.display = test;
-      });
-
-      // what happens if hover over other menu option
-      x.addEventListener('mouseover', function() {
-
-        let j = _this.active_option;
-        if(j != -1 && j != i) {
-          let z = document.getElementById(_this.id + '_drop_' + j);
-          let a = document.getElementById(_this.id + '_' + j);
-          z.style.display = 'none';
-          a.style.backgroundColor = _this.background;
-          x.style.backgroundColor = _this.menu_root_select;
-          y.style.display = 'block';
-          _this.active_option = i;
-        }
-
-      });
-
-      // listeners to the menu items
-      for(let j = 0; j < this.structure[i][1].length; ++j) {
-
-        let x = document.getElementById(this.id + '_' + i + '_' + j);
-
-        x.addEventListener('mouseover', function() {
-          x.style.backgroundColor = _this.dropdown_button;
-        });
-
-        x.addEventListener('mouseleave', function() {
-          x.style.backgroundColor = _this.dropdown_background;
-        });
-      }
-
-    }
-
     // what happens if click out of box
     window.addEventListener('click', function(e) {
       for(let i = 0; i < _this.structure.length; ++i) {
@@ -238,8 +290,11 @@ class Menu {
     });
 
 
-
   }
+
+
+
+
 
   if_clicked(menu_option, button_option, output) {
 
